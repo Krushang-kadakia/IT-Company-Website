@@ -20,6 +20,23 @@ export default function Products() {
         </p>
 
         <div className="mt-20 space-y-16">
+          
+          <ProductCard
+            name="Embaino"
+            status="Beta"
+            description="A smart Visitor Management System for corporate and residential usage."
+            features={[
+              "Touchless registration to avoid queues and hasel",
+              "Face recognition for faster and smooth entry",
+              "OTP verification for authentication",
+            ]}
+            useCases={[
+              "Corporate Parks",
+              "Residential Complexes",
+              "Major Events",
+            ]}
+          />
+          
           <ProductCard
             name="InvoicePro"
             status="Live"
