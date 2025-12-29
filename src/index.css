@@ -1,29 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@keyframes starsSlow {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(-200px);
-  }
-}
-
-@keyframes starsSlower {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(-100px);
-  }
-}
-
-.animate-starsSlow {
-  animation: starsSlow 60s linear infinite;
-}
-
-.animate-starsSlower {
-  animation: starsSlower 120s linear infinite;
-}

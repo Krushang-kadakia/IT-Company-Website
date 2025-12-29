@@ -3,9 +3,8 @@ export default function ClientLogos() {
     <section
       className="
         py-20 text-center
-        bg-white/70 text-gray-900
-        dark:bg-brand-dark/70 dark:text-gray-100
-        backdrop-blur-md
+        bg-white text-gray-900
+        dark:bg-brand-dark dark:text-gray-100
         transition-colors
       "
     >

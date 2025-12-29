@@ -5,9 +5,8 @@ export default function Hero() {
     <section
       className="
         relative py-28 overflow-hidden
-        bg-white/70 text-gray-900
-        dark:bg-brand-dark/70 dark:text-gray-100
-        backdrop-blur-md
+        bg-white text-gray-900
+        dark:bg-brand-dark dark:text-gray-100
         transition-colors
       "
     >

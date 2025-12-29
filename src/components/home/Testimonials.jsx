@@ -3,9 +3,8 @@ export default function Testimonials() {
     <section
       className="
         py-28
-        bg-gray-50/70 text-gray-900
-        dark:bg-brand-dark/70 dark:text-gray-100
-        backdrop-blur-md
+        bg-gray-50 text-gray-900
+        dark:bg-brand-dark dark:text-gray-100
         transition-colors
       "
     >

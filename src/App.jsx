@@ -2,15 +2,11 @@ import { BrowserRouter } from "react-router-dom";
 import AppRoutes from "./routes/AppRoutes";
 import Navbar from "./components/common/Navbar";
 import Footer from "./components/common/Footer";
-import GalaxyBackground from "./components/common/GalaxyBackground";
 
 function App() {
   return (
     <BrowserRouter>
       <div className="relative min-h-screen overflow-hidden">
-
-        {/* Animated Galaxy Background */}
-        <GalaxyBackground />
 
         {/* App Content */}
         <Navbar />
