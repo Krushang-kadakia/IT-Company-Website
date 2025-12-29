@@ -27,7 +27,14 @@ export default function ClientLogos() {
 
 function Logo({ name }) {
   return (
-    <div className="text-lg font-semibold text-gray-600 dark:text-gray-300">
+    <div
+      className="
+        text-lg font-semibold text-gray-600 dark:text-gray-300
+        transition-opacity duration-300
+        hover:opacity-100
+        opacity-70
+      "
+    >
       {name}
     </div>
   );

@@ -1,46 +1,99 @@
-import { CodeBracketIcon, CloudIcon, CpuChipIcon } from "@heroicons/react/24/outline";
+import {
+  CodeBracketIcon,
+  DevicePhoneMobileIcon,
+  CpuChipIcon,
+  CloudIcon,
+  PaintBrushIcon,
+  BuildingOffice2Icon,
+} from "@heroicons/react/24/outline";
 
 export default function ServicesPreview() {
   return (
-    <section
-      className="
-        py-24
-        bg-white text-gray-900
-        dark:bg-brand-dark dark:text-gray-100
-      "
-    >
-      <div className="max-w-7xl mx-auto px-6 text-center">
-        <h2 className="text-3xl font-bold">
-          What We Do
-        </h2>
+    <section className="py-24 bg-white dark:bg-brand-dark transition-colors">
+      <div className="max-w-7xl mx-auto px-6">
 
-        <p className="mt-6 text-sm text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-          We build modern digital solutions that help businesses grow faster.
-        </p>
+        <div className="text-center max-w-3xl mx-auto">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+            Our Services
+          </h2>
+          <p className="mt-4 text-gray-600 dark:text-gray-400">
+            End-to-end digital solutions tailored for your business.
+          </p>
+        </div>
 
         <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          <Card icon={<CodeBracketIcon className="h-8 w-8" />} title="Web & App Development" />
-          <Card icon={<CloudIcon className="h-8 w-8" />} title="Cloud & DevOps" />
-          <Card icon={<CpuChipIcon className="h-8 w-8" />} title="AI & Automation" />
+          <ServiceCard
+            icon={CodeBracketIcon}
+            title="Web Development"
+            description="Modern, scalable, and high-performance web applications."
+          />
+
+          <ServiceCard
+            icon={DevicePhoneMobileIcon}
+            title="Mobile App Development"
+            description="Cross-platform mobile apps for iOS and Android."
+          />
+
+          <ServiceCard
+            icon={CpuChipIcon}
+            title="AI & Automation"
+            description="Intelligent systems to automate and optimize workflows."
+          />
+
+          <ServiceCard
+            icon={CloudIcon}
+            title="Cloud & DevOps"
+            description="Secure, scalable cloud infrastructure and CI/CD pipelines."
+          />
+
+          <ServiceCard
+            icon={PaintBrushIcon}
+            title="UI / UX Design"
+            description="User-centered designs that enhance engagement."
+          />
+
+          <ServiceCard
+            icon={BuildingOffice2Icon}
+            title="Enterprise Solutions"
+            description="Robust systems built for enterprise scale and security."
+          />
         </div>
+
       </div>
     </section>
   );
 }
 
-function Card({ icon, title }) {
+function ServiceCard({ icon: Icon, title, description }) {
   return (
     <div
       className="
-        bg-gray-50 dark:bg-brand-dark
-        border border-gray-200 dark:border-gray-700
+        group
         p-8 rounded-xl
-        hover:shadow-lg hover:-translate-y-1
+        border border-gray-200 dark:border-gray-700
+        bg-white dark:bg-brand-dark
         transition-all duration-300
+        hover:-translate-y-1 hover:shadow-lg
       "
     >
-      <div className="text-brand-primary">{icon}</div>
-      <h3 className="mt-4 font-semibold">{title}</h3>
+      <div
+        className="
+          h-12 w-12 flex items-center justify-center rounded-lg
+          bg-brand-primary/10 text-brand-primary
+          transition-transform duration-300
+          group-hover:scale-110
+        "
+      >
+        <Icon className="h-6 w-6" />
+      </div>
+
+      <h3 className="mt-6 text-lg font-semibold text-gray-900 dark:text-gray-100">
+        {title}
+      </h3>
+
+      <p className="mt-3 text-sm text-gray-600 dark:text-gray-400">
+        {description}
+      </p>
     </div>
   );
 }
