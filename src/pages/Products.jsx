@@ -38,48 +38,49 @@ export default function Products() {
           />
           
           <ProductCard
-            name="InvoicePro"
+            name="Vendora"
             status="Live"
-            description="A smart invoicing and billing platform for modern businesses."
+            description=""
             features={[
-              "Automated invoices & payments",
-              "GST & tax support",
-              "Customer & subscription management",
-              "Secure cloud storage",
+              "",
+              "",
+              "",
+              "",
             ]}
             useCases={[
-              "Freelancers",
-              "Small businesses",
-              "Agencies",
+              "",
+              "",
+              "",
             ]}
           />
 
           <ProductCard
-            name="CloudOps"
-            status="Beta"
-            description="A DevOps automation and cloud monitoring toolkit."
+            name="MSP"
+            status="Coming Soon"
+            description="Project management application ."
             features={[
-              "CI/CD pipeline automation",
-              "Real-time monitoring",
-              "Cloud cost optimization",
-              "Alerting & logging",
+              "Mail integration",
+              "Graph visualisation",
+              "Export of documents",
+              "Role and access management",
             ]}
             useCases={[
-              "DevOps teams",
-              "Startups",
-              "Enterprises",
+              "Real estate",
+              "Product based IT company",
+              "Marketing and Sales",
+              "Manufacturing and Production",
             ]}
           />
 
           <ProductCard
-            name="AI Insights"
+            name="Quotalyze"
             status="Coming Soon"
             description="An AI-powered analytics platform for data-driven decisions."
             features={[
-              "Predictive analytics",
-              "Custom dashboards",
-              "Automated reports",
-              "AI recommendations",
+              "",
+              "",
+              "",
+              "",
             ]}
             useCases={[
               "Product teams",
