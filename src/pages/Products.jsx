@@ -40,17 +40,17 @@ export default function Products() {
           <ProductCard
             name="Vendora"
             status="Live"
-            description=""
+            description="AI-powered platform to streamline invoice submission and processing for vendors"
             features={[
-              "",
-              "",
-              "",
-              "",
+              "AI assistant invoice submission",
+              "Online submission and processing",
+              "Timely processing of invoices",
+              "Structured and organise bill management",
             ]}
             useCases={[
-              "",
-              "",
-              "",
+              "Hospitals",
+              "Real estate companies",
+              "Product-based businesses",
             ]}
           />
 
@@ -75,17 +75,17 @@ export default function Products() {
           <ProductCard
             name="Quotalyze"
             status="Coming Soon"
-            description="An AI-powered analytics platform for data-driven decisions."
+            description="An AI-powered quotation analytics platform for data-driven decisions."
             features={[
-              "",
-              "",
-              "",
-              "",
+              "Suppport for multiple file types",
+              "Ensures completeness of quotations for analysis",
+              "Compares previous quotes to analyze trends",
+              "Downloadable reports",
             ]}
             useCases={[
-              "Product teams",
+              "Contract teams",
               "Business analysts",
-              "Founders",
+              "Purchase teams",
             ]}
           />
         </div>
