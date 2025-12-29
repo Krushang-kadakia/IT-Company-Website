@@ -2,11 +2,13 @@ import ServiceCard from "../components/services/ServiceCard";
 import Process from "../components/services/Process";
 import TechStack from "../components/services/TechStack";
 import Audience from "../components/services/Audience";
+import AnimatedSection from "../components/common/AnimatedSection";
 
 export default function Services() {
   return (
     <>
       {/* Services Overview */}
+      <AnimatedSection delay={0.1}>
       <section
         className="
           py-24
@@ -35,10 +37,20 @@ export default function Services() {
           </div>
         </div>
       </section>
+      </AnimatedSection>
 
-      <Process />
-      <TechStack />
-      <Audience />
+      <AnimatedSection delay={0.2}>
+        <Process />
+      </AnimatedSection>
+
+      <AnimatedSection delay={0.3}>
+        <TechStack />
+      </AnimatedSection>
+      
+      <AnimatedSection delay={0.4}>
+        <Audience />
+      </AnimatedSection>
+      
     </>
   );
 }

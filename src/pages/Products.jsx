@@ -1,4 +1,5 @@
 import ProductCard from "../components/products/ProductCard";
+import AnimatedSection from "../components/common/AnimatedSection";
 
 export default function Products() {
   return (
@@ -21,6 +22,7 @@ export default function Products() {
 
         <div className="mt-20 space-y-16">
           
+          <AnimatedSection delay={0.1}>
           <ProductCard
             name="Embaino"
             status="Beta"
@@ -36,7 +38,9 @@ export default function Products() {
               "Major Events",
             ]}
           />
+          </AnimatedSection>
           
+          <AnimatedSection delay={0.2}>
           <ProductCard
             name="Vendora"
             status="Live"
@@ -53,7 +57,9 @@ export default function Products() {
               "Product-based businesses",
             ]}
           />
+          </AnimatedSection>
 
+          <AnimatedSection delay={0.3}>
           <ProductCard
             name="MSP"
             status="Coming Soon"
@@ -71,7 +77,9 @@ export default function Products() {
               "Manufacturing and Production",
             ]}
           />
+          </AnimatedSection>
 
+          <AnimatedSection delay={0.4}>
           <ProductCard
             name="Quotalyze"
             status="Coming Soon"
@@ -88,6 +96,8 @@ export default function Products() {
               "Purchase teams",
             ]}
           />
+          </AnimatedSection>
+          
         </div>
       </div>
     </section>
