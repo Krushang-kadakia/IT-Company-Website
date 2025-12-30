@@ -3,11 +3,13 @@ import AppRoutes from "./routes/AppRoutes";
 import Navbar from "./components/common/Navbar";
 import Footer from "./components/common/Footer";
 import BackgroundWrapper from "./components/common/BackgroundWrapper";
+import ScrollToTop from "./components/common/ScrollToTop";
 
 function App() {
   return (
     <BrowserRouter>
       <BackgroundWrapper>
+        <ScrollToTop />
         <div className="relative min-h-screen">
           {/* App Content */}
           <Navbar />

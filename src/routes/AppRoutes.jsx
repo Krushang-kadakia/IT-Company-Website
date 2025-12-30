@@ -5,6 +5,7 @@ import Services from "../pages/Services";
 import Products from "../pages/Products";
 import About from "../pages/About";
 import Contact from "../pages/Contact";
+import NotFound from "../pages/NotFound";
 
 export default function AppRoutes() {
   const location = useLocation();
@@ -34,6 +35,8 @@ export default function AppRoutes() {
             }
           />
         ))}
+        {/* Catch-all Route for 404 */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>
   );
