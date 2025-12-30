@@ -35,7 +35,7 @@ export default function Hero() {
         </p>
 
         <div className="mt-12 flex justify-center gap-4">
-          <Button>Our Services</Button>
+          <Button variant="outline">Our Services</Button>
           <Button variant="outline">Contact Us</Button>
         </div>
       </div>
