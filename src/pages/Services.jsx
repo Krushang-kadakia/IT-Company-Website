@@ -1,3 +1,19 @@
+import {
+  CodeBracketIcon,
+  DevicePhoneMobileIcon,
+  CpuChipIcon,
+  CloudIcon,
+  PaintBrushIcon,
+  BuildingOffice2Icon,
+} from "@heroicons/react/24/outline";
+
+import webDev from "../assets/services/web-dev.png";
+import mobileApp from "../assets/services/mobile-app.png";
+import aiAutomation from "../assets/services/ai-automation.png";
+import cloudDevops from "../assets/services/cloud-devops.png";
+import uiux from "../assets/services/ui-ux.png";
+import enterprise from "../assets/services/enterprise.png";
+
 import ServiceCard from "../components/services/ServiceCard";
 import Process from "../components/services/Process";
 import TechStack from "../components/services/TechStack";
@@ -28,13 +44,49 @@ export default function Services() {
           </p>
 
           <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            <ServiceCard title="Web Development" description="Modern, high-performance web applications." />
-            <ServiceCard title="Mobile Apps" description="Cross-platform mobile solutions for iOS and Android." />
-            <ServiceCard title="AI & Automation" description="Intelligent systems to optimize workflows." />
-            <ServiceCard title="Cloud & DevOps" description="Scalable cloud infrastructure and CI/CD pipelines." />
-            <ServiceCard title="UI/UX Design" description="User-focused design for better engagement." />
-            <ServiceCard title="Enterprise Software" description="Custom systems built for scale and security." />
+            <ServiceCard
+              title="Web Development"
+              description="Modern, high-performance web applications."
+              icon={CodeBracketIcon}
+              image={webDev}
+            />
+
+            <ServiceCard
+              title="Mobile Apps"
+              description="Cross-platform mobile solutions for iOS and Android."
+              icon={DevicePhoneMobileIcon}
+              image={mobileApp}
+            />
+
+            <ServiceCard
+              title="AI & Automation"
+              description="Intelligent systems to optimize workflows."
+              icon={CpuChipIcon}
+              image={aiAutomation}
+            />
+
+            <ServiceCard
+              title="Cloud & DevOps"
+              description="Scalable cloud infrastructure and CI/CD pipelines."
+              icon={CloudIcon}
+              image={cloudDevops}
+            />
+
+            <ServiceCard
+              title="UI / UX Design"
+              description="User-focused design for better engagement."
+              icon={PaintBrushIcon}
+              image={uiux}
+            />
+
+            <ServiceCard
+              title="Enterprise Software"
+              description="Custom systems built for scale and security."
+              icon={BuildingOffice2Icon}
+              image={enterprise}
+            />
           </div>
+
         </div>
       </section>
       </AnimatedSection>
