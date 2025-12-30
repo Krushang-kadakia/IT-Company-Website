@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 export default function ProductCard({
   image,
   name,
@@ -18,7 +20,7 @@ export default function ProductCard({
         bg-white dark:bg-brand-dark
         border border-gray-200 dark:border-gray-700
         rounded-2xl p-10
-        transition-all duration-300
+        transition-all duration-300 ease-out
         hover:shadow-xl hover:-translate-y-1
       "
     >
@@ -76,13 +78,16 @@ export default function ProductCard({
 
             <ul className="mt-4 grid sm:grid-cols-2 gap-3 text-sm">
               {features.map((feature) => (
-                <li
+                <motion.li
                   key={feature}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.25 }}
                   className="flex items-start gap-2"
                 >
                   <span className="text-brand-primary">•</span>
                   <span>{feature}</span>
-                </li>
+                </motion.li>
               ))}
             </ul>
           </div>
@@ -114,7 +119,9 @@ export default function ProductCard({
             <button
               className="
                 text-sm font-semibold text-brand-primary
-                hover:underline
+                inline-flex items-center gap-1
+                transition-all duration-200
+                hover:gap-2 hover:underline
               "
             >
               Learn more →
