@@ -1,5 +1,6 @@
 import Button from "../common/Button";
 import { Link } from "react-router-dom";
+import ScrollReveal from "../common/ScrollReveal";
 
 export default function Hero() {
   return (
@@ -25,27 +26,33 @@ export default function Hero() {
       />
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 text-center text-white">
-        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">
-          Building Scalable Digital Products
-        </h1>
+      <div className="relative z-10 max-w-7xl mx-auto px-6 text-center text-white flex flex-col items-center">
+        <ScrollReveal>
+          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">
+            Building Scalable Digital Products
+          </h1>
+        </ScrollReveal>
 
-        <p className="mt-6 text-lg text-gray-200 max-w-2xl mx-auto">
-          We help startups and enterprises design, develop, and scale
-          software solutions using modern technologies.
-        </p>
+        <ScrollReveal delay={0.2}>
+          <p className="mt-6 text-lg text-gray-200 max-w-2xl mx-auto">
+            We help startups and enterprises design, develop, and scale
+            software solutions using modern technologies.
+          </p>
+        </ScrollReveal>
 
-        <div className="mt-12 flex justify-center gap-4">
-          <Link to="/services">
-            <Button variant="outline">Our Services</Button>
-          </Link>
-          <Link to="/products">
-            <Button variant="outline">Our Products</Button>
-          </Link>
-          <Link to="/contact">
-            <Button variant="outline">Contact Us</Button>
-          </Link>
-        </div>
+        <ScrollReveal delay={0.4}>
+          <div className="mt-12 flex justify-center gap-4">
+            <Link to="/services">
+              <Button variant="outline">Our Services</Button>
+            </Link>
+            <Link to="/products">
+              <Button variant="outline">Our Products</Button>
+            </Link>
+            <Link to="/contact">
+              <Button variant="outline">Contact Us</Button>
+            </Link>
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );

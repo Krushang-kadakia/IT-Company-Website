@@ -1,11 +1,21 @@
 import { NavLink, Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Sun, Moon, Menu, X } from "lucide-react";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [dark, setDark] = useState(
     document.documentElement.classList.contains("dark")
   );
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   function toggleDarkMode() {
     const html = document.documentElement;
@@ -21,24 +31,28 @@ export default function Navbar() {
   }
 
   const navLinkClass = ({ isActive }) =>
-    `block hover:text-brand-primary ${
-      isActive ? "text-brand-primary font-semibold" : ""
+    `block text-sm font-medium transition-colors hover:text-brand-primary ${isActive ? "text-brand-primary font-semibold" : ""
     }`;
 
   return (
-    <nav className="sticky top-0 z-50 bg-white dark:bg-brand-dark border-b border-gray-200 dark:border-gray-700">
+    <nav
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled
+          ? "bg-white/70 dark:bg-brand-dark/70 backdrop-blur-lg shadow-sm"
+          : "bg-transparent"
+        }`}
+    >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        
+
         {/* Logo */}
         <Link
           to="/"
-          className="text-xl font-bold text-brand-primary"
+          className="text-xl font-bold text-brand-primary tracking-tight"
         >
           TechNova
         </Link>
 
         {/* Desktop Links */}
-        <div className="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-700 dark:text-gray-200">
+        <div className="hidden md:flex items-center space-x-8 text-gray-700 dark:text-gray-200">
           <NavLink to="/" className={navLinkClass}>Home</NavLink>
           <NavLink to="/services" className={navLinkClass}>Services</NavLink>
           <NavLink to="/products" className={navLinkClass}>Products</NavLink>
@@ -48,29 +62,28 @@ export default function Navbar() {
           {/* Dark Mode Toggle */}
           <button
             onClick={toggleDarkMode}
-            className="ml-4 px-3 py-1 rounded-md border text-xs
-                       border-gray-300 dark:border-gray-600
-                       hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+            className="ml-4 p-2 rounded-full text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+            aria-label="Toggle Dark Mode"
           >
-            {dark ? "☀️ Light" : "🌙 Dark"}
+            {dark ? <Sun size={20} /> : <Moon size={20} />}
           </button>
         </div>
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden text-gray-700 dark:text-gray-200"
+          className="md:hidden text-gray-700 dark:text-gray-200 p-2"
           onClick={() => setOpen(!open)}
         >
-          ☰
+          {open ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden overflow-hidden transition-all duration-300
-        ${open ? "max-h-64 opacity-100" : "max-h-0 opacity-0"}`}
+        className={`md:hidden overflow-hidden transition-all duration-300 ${open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+          }`}
       >
-        <div className="bg-white dark:bg-brand-dark border-t border-gray-200 dark:border-gray-700 px-6 py-4 space-y-4 text-sm font-medium text-gray-700 dark:text-gray-200">
+        <div className="bg-white/95 dark:bg-brand-dark/95 backdrop-blur-md border-t border-gray-200 dark:border-gray-700 px-6 py-4 space-y-4 text-gray-700 dark:text-gray-200">
           <NavLink to="/" onClick={() => setOpen(false)} className={navLinkClass}>Home</NavLink>
           <NavLink to="/services" onClick={() => setOpen(false)} className={navLinkClass}>Services</NavLink>
           <NavLink to="/products" onClick={() => setOpen(false)} className={navLinkClass}>Products</NavLink>
@@ -78,17 +91,18 @@ export default function Navbar() {
           <NavLink to="/contact" onClick={() => setOpen(false)} className={navLinkClass}>Contact</NavLink>
 
           {/* Mobile Dark Toggle */}
-          <button
-            onClick={() => {
-              toggleDarkMode();
-              setOpen(false);
-            }}
-            className="mt-2 px-3 py-2 rounded-md border text-xs w-fit
-                       border-gray-300 dark:border-gray-600
-                       hover:bg-gray-100 dark:hover:bg-gray-700 transition"
-          >
-            {dark ? "☀️ Light Mode" : "🌙 Dark Mode"}
-          </button>
+          <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
+            <button
+              onClick={() => {
+                toggleDarkMode();
+                setOpen(false);
+              }}
+              className="flex items-center space-x-2 text-sm font-medium hover:text-brand-primary"
+            >
+              {dark ? <Sun size={18} /> : <Moon size={18} />}
+              <span>{dark ? "Light Mode" : "Dark Mode"}</span>
+            </button>
+          </div>
         </div>
       </div>
     </nav>

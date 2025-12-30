@@ -2,21 +2,23 @@ import { BrowserRouter } from "react-router-dom";
 import AppRoutes from "./routes/AppRoutes";
 import Navbar from "./components/common/Navbar";
 import Footer from "./components/common/Footer";
+import BackgroundWrapper from "./components/common/BackgroundWrapper";
 
 function App() {
   return (
     <BrowserRouter>
-      <div className="relative min-h-screen overflow-hidden">
+      <BackgroundWrapper>
+        <div className="relative min-h-screen">
+          {/* App Content */}
+          <Navbar />
 
-        {/* App Content */}
-        <Navbar />
+          <main className="relative z-10">
+            <AppRoutes />
+          </main>
 
-        <main className="relative z-10">
-          <AppRoutes />
-        </main>
-
-        <Footer />
-      </div>
+          <Footer />
+        </div>
+      </BackgroundWrapper>
     </BrowserRouter>
   );
 }
