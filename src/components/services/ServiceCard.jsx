@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 export default function ServiceCard({
   title,
   description,
@@ -5,15 +7,16 @@ export default function ServiceCard({
   image,
 }) {
   return (
-    <div
+    <motion.div
+      whileHover={{ y: -8, boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)" }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
       className="
         group
         flex flex-col items-center text-center
         bg-white dark:bg-brand-dark
         border border-gray-200 dark:border-gray-700
         p-8 rounded-xl
-        transition-all duration-300
-        hover:-translate-y-1 hover:shadow-lg
+        cursor-pointer
       "
     >
       {/* Image Container (inherits card background) */}
@@ -61,6 +64,6 @@ export default function ServiceCard({
       <p className="mt-3 text-sm text-gray-600 dark:text-gray-400">
         {description}
       </p>
-    </div>
+    </motion.div>
   );
 }

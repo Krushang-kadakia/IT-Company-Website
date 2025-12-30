@@ -15,13 +15,13 @@ export default function ProductCard({
   };
 
   return (
-    <div
+    <motion.div
+      whileHover={{ scale: 1.02, boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)" }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
       className="
         bg-white dark:bg-brand-dark
         border border-gray-200 dark:border-gray-700
         rounded-2xl p-10
-        transition-all duration-300 ease-out
-        hover:shadow-xl hover:-translate-y-1
       "
     >
       {/* Top Section */}
@@ -130,6 +130,6 @@ export default function ProductCard({
 
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
