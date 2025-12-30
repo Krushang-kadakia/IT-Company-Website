@@ -14,6 +14,9 @@ export default {
           dark: "#0f172a",
         },
       },
+      fontFamily: {
+        sans: ["Outfit", "sans-serif"],
+      },
     },
   },
   plugins: [],
