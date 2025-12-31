@@ -2,19 +2,6 @@ import { useState, useEffect } from "react";
 import ProductCard from "../components/products/ProductCard";
 import AnimatedSection from "../components/common/AnimatedSection";
 
-// Product images (PNG)
-import EmbainoImg from "../assets/products/embaino.png";
-import VendoraImg from "../assets/products/vendora.png";
-import MspImg from "../assets/products/msp.png";
-import QuotalyzeImg from "../assets/products/quotalyze.png";
-
-const imageMap = {
-  "Embaino": EmbainoImg,
-  "Vendora": VendoraImg,
-  "MSP": MspImg,
-  "Quotalyze": QuotalyzeImg,
-};
-
 export default function Products() {
   const [products, setProducts] = useState([]);
 
@@ -49,7 +36,7 @@ export default function Products() {
           {products.map((product, index) => (
             <AnimatedSection key={product.id} delay={0.1 + index * 0.1}>
               <ProductCard
-                image={imageMap[product.name]}
+                image={product.image}
                 name={product.name}
                 status={product.status}
                 description={product.description}

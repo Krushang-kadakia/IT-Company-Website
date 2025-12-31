@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import {
   CodeBracketIcon,
   DevicePhoneMobileIcon,
@@ -7,14 +8,25 @@ import {
   BuildingOffice2Icon,
 } from "@heroicons/react/24/outline";
 
-import webDev from "../../assets/services/web-dev.png";
-import mobileApp from "../../assets/services/mobile-app.png";
-import aiAutomation from "../../assets/services/ai-automation.png";
-import cloudDevops from "../../assets/services/cloud-devops.png";
-import uiux from "../../assets/services/ui-ux.png";
-import enterprise from "../../assets/services/enterprise.png";
+const iconMap = {
+  CodeBracketIcon,
+  DevicePhoneMobileIcon,
+  CpuChipIcon,
+  CloudIcon,
+  PaintBrushIcon,
+  BuildingOffice2Icon,
+};
 
 export default function ServicesPreview() {
+  const [services, setServices] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/services')
+      .then((res) => res.json())
+      .then((data) => setServices(data))
+      .catch((err) => console.error("Failed to fetch services:", err));
+  }, []);
+
   return (
     <section className="py-24 bg-white dark:bg-brand-dark transition-colors">
       <div className="max-w-7xl mx-auto px-6">
@@ -29,47 +41,15 @@ export default function ServicesPreview() {
         </div>
 
         <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          <ServiceCard
-            image={webDev}
-            icon={CodeBracketIcon}
-            title="Web Development"
-            description="Modern, scalable, and high-performance web applications."
-          />
-
-          <ServiceCard
-            image={mobileApp}
-            icon={DevicePhoneMobileIcon}
-            title="Mobile App Development"
-            description="Cross-platform mobile apps for iOS and Android."
-          />
-
-          <ServiceCard
-            image={aiAutomation}
-            icon={CpuChipIcon}
-            title="AI & Automation"
-            description="Intelligent systems to automate and optimize workflows."
-          />
-
-          <ServiceCard
-            image={cloudDevops}
-            icon={CloudIcon}
-            title="Cloud & DevOps"
-            description="Secure, scalable cloud infrastructure and CI/CD pipelines."
-          />
-
-          <ServiceCard
-            image={uiux}
-            icon={PaintBrushIcon}
-            title="UI / UX Design"
-            description="User-centered designs that enhance engagement."
-          />
-
-          <ServiceCard
-            image={enterprise}
-            icon={BuildingOffice2Icon}
-            title="Enterprise Solutions"
-            description="Robust systems built for enterprise scale and security."
-          />
+          {services.map((service) => (
+            <ServiceCard
+              key={service.id}
+              image={service.image}
+              icon={iconMap[service.icon]}
+              title={service.title}
+              description={service.description}
+            />
+          ))}
         </div>
 
       </div>

@@ -6,32 +6,38 @@ const servicesData = [
     {
         title: "Web Development",
         description: "Modern, high-performance web applications.",
-        icon: "CodeBracketIcon"
+        icon: "CodeBracketIcon",
+        image: "/images/services/web-dev.png"
     },
     {
         title: "Mobile Apps",
         description: "Cross-platform mobile solutions for iOS and Android.",
-        icon: "DevicePhoneMobileIcon"
+        icon: "DevicePhoneMobileIcon",
+        image: "/images/services/mobile-app.png"
     },
     {
         title: "AI & Automation",
         description: "Intelligent systems to optimize workflows.",
-        icon: "CpuChipIcon"
+        icon: "CpuChipIcon",
+        image: "/images/services/ai-automation.png"
     },
     {
         title: "Cloud & DevOps",
         description: "Scalable cloud infrastructure and CI/CD pipelines.",
-        icon: "CloudIcon"
+        icon: "CloudIcon",
+        image: "/images/services/cloud-devops.png"
     },
     {
         title: "UI / UX Design",
         description: "User-focused design for better engagement.",
-        icon: "PaintBrushIcon"
+        icon: "PaintBrushIcon",
+        image: "/images/services/ui-ux.png"
     },
     {
         title: "Enterprise Software",
         description: "Custom systems built for scale and security.",
-        icon: "BuildingOffice2Icon"
+        icon: "BuildingOffice2Icon",
+        image: "/images/services/enterprise.png"
     }
 ];
 
@@ -40,6 +46,7 @@ const productsData = [
         name: "Embaino",
         status: "Beta",
         description: "A smart Visitor Management System for corporate and residential usage.",
+        image: "/images/products/embaino.png",
         features: [
             "Touchless registration to avoid queues and hassle",
             "Face recognition for faster and smooth entry",
@@ -55,6 +62,7 @@ const productsData = [
         name: "Vendora",
         status: "Live",
         description: "AI-powered platform to streamline invoice submission and processing for vendors.",
+        image: "/images/products/vendora.png",
         features: [
             "AI-assisted invoice submission",
             "Online submission and processing",
@@ -71,6 +79,7 @@ const productsData = [
         name: "MSP",
         status: "Coming Soon",
         description: "A modern project management application.",
+        image: "/images/products/msp.png",
         features: [
             "Mail integration",
             "Graph visualisation",
@@ -88,6 +97,7 @@ const productsData = [
         name: "Quotalyze",
         status: "Coming Soon",
         description: "An AI-powered quotation analytics platform for data-driven decisions.",
+        image: "/images/products/quotalyze.png",
         features: [
             "Support for multiple file types",
             "Ensures completeness of quotations",

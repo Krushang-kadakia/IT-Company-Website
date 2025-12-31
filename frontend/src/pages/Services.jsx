@@ -8,13 +8,6 @@ import {
   BuildingOffice2Icon,
 } from "@heroicons/react/24/outline";
 
-import webDev from "../assets/services/web-dev.png";
-import mobileApp from "../assets/services/mobile-app.png";
-import aiAutomation from "../assets/services/ai-automation.png";
-import cloudDevops from "../assets/services/cloud-devops.png";
-import uiux from "../assets/services/ui-ux.png";
-import enterprise from "../assets/services/enterprise.png";
-
 import ServiceCard from "../components/services/ServiceCard";
 import Process from "../components/services/Process";
 import TechStack from "../components/services/TechStack";
@@ -28,15 +21,6 @@ const iconMap = {
   CloudIcon,
   PaintBrushIcon,
   BuildingOffice2Icon,
-};
-
-const imageMap = {
-  "Web Development": webDev,
-  "Mobile Apps": mobileApp,
-  "AI & Automation": aiAutomation,
-  "Cloud & DevOps": cloudDevops,
-  "UI / UX Design": uiux,
-  "Enterprise Software": enterprise,
 };
 
 export default function Services() {
@@ -78,7 +62,7 @@ export default function Services() {
                   title={service.title}
                   description={service.description}
                   icon={iconMap[service.icon]}
-                  image={imageMap[service.title]}
+                  image={service.image}
                 />
               ))}
             </div>

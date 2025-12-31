@@ -11,10 +11,17 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(helmet());
+const path = require('path');
+
+app.use(helmet({
+    crossOriginResourcePolicy: false,
+}));
 app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
+
+// Serve static files from the 'public' directory
+app.use(express.static(path.join(__dirname, 'public')));
 
 const apiRoutes = require('./routes/apiRoutes');
 
