@@ -7,9 +7,12 @@ const storage = multer.diskStorage({
         let uploadPath = 'public/images/';
 
         // Determine subfolder based on route or field name
-        if (req.body.type === 'service' || req.baseUrl.includes('services')) {
+        const isService = req.body.type === 'service' || req.baseUrl.includes('services') || req.originalUrl.includes('services');
+        const isProduct = req.body.type === 'product' || req.baseUrl.includes('products') || req.originalUrl.includes('products');
+
+        if (isService) {
             uploadPath += 'services/';
-        } else if (req.body.type === 'product' || req.baseUrl.includes('products')) {
+        } else if (isProduct) {
             uploadPath += 'products/';
         } else {
             // Default fallback if logic is ambiguous, though we should handle this in controller

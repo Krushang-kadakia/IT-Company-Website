@@ -124,6 +124,8 @@ export default function Admin() {
         // Append image if new one selected
         if (formData.image instanceof File) {
             data.append('image', formData.image);
+            // Explicitly set type for backend storage logic
+            data.append('type', activeTab === 'services' ? 'service' : 'product');
         }
 
         const endpoint = activeTab === 'services' ? '/api/services' : '/api/products';
