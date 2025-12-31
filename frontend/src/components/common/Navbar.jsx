@@ -37,8 +37,8 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled
-          ? "bg-white/70 dark:bg-brand-dark/70 backdrop-blur-lg shadow-sm"
-          : "bg-transparent"
+        ? "bg-white/70 dark:bg-brand-dark/70 backdrop-blur-lg shadow-sm"
+        : "bg-transparent"
         }`}
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -46,8 +46,9 @@ export default function Navbar() {
         {/* Logo */}
         <Link
           to="/"
-          className="text-xl font-bold text-brand-primary tracking-tight"
+          className="flex items-center gap-2 text-xl font-bold text-brand-primary tracking-tight"
         >
+          <img src="/logo.png" alt="TechNova Logo" className="h-8 w-auto" />
           TechNova
         </Link>
 
