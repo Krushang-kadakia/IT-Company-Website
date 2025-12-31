@@ -5,3 +5,7 @@ coverage/
 .env
 .idea/
 .vscode/
+
+# Backend
+backend/database.sqlite
+backend/node_modules/
