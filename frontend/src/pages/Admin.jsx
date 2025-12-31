@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
     TrashIcon,
     PencilSquareIcon,
     PlusIcon,
-    XMarkIcon
+    XMarkIcon,
+    ArrowRightStartOnRectangleIcon
 } from "@heroicons/react/24/outline";
 
 export default function Admin() {
+    const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState("services");
     const [services, setServices] = useState([]);
     const [products, setProducts] = useState([]);
@@ -16,22 +19,40 @@ export default function Admin() {
     const [editingItem, setEditingItem] = useState(null);
     const [formData, setFormData] = useState({});
 
-    // Fetch Data
+    // Auth Check & Fetch
     useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            navigate('/login');
+            return;
+        }
         fetchServices();
         fetchProducts();
-    }, []);
+    }, [navigate]);
+
+    const getAuthHeaders = () => {
+        const token = localStorage.getItem('token');
+        return token ? { 'Authorization': `Bearer ${token}` } : {};
+    };
 
     const fetchServices = () => {
-        fetch('/api/services')
+        fetch('/api/services', { headers: getAuthHeaders() })
             .then(res => res.json())
-            .then(data => setServices(data));
+            .then(data => setServices(data))
+            .catch(() => alert('Failed to fetch services'));
     };
 
     const fetchProducts = () => {
-        fetch('/api/products')
+        fetch('/api/products', { headers: getAuthHeaders() })
             .then(res => res.json())
-            .then(data => setProducts(data));
+            .then(data => setProducts(data))
+            .catch(() => alert('Failed to fetch products'));
+    };
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        navigate('/login');
     };
 
     // Form Handling
@@ -94,6 +115,7 @@ export default function Admin() {
         try {
             const res = await fetch(url, {
                 method: method,
+                headers: getAuthHeaders(),
                 body: data
             });
 
@@ -101,6 +123,8 @@ export default function Admin() {
                 closeModal();
                 if (activeTab === 'services') fetchServices();
                 else fetchProducts();
+            } else if (res.status === 401) {
+                handleLogout();
             } else {
                 alert('Failed to save');
             }
@@ -116,9 +140,16 @@ export default function Admin() {
         const endpoint = activeTab === 'services' ? `/api/services/${id}` : `/api/products/${id}`;
 
         try {
-            await fetch(endpoint, { method: 'DELETE' });
-            if (activeTab === 'services') fetchServices();
-            else fetchProducts();
+            const res = await fetch(endpoint, {
+                method: 'DELETE',
+                headers: getAuthHeaders()
+            });
+            if (res.ok) {
+                if (activeTab === 'services') fetchServices();
+                else fetchProducts();
+            } else if (res.status === 401) {
+                handleLogout();
+            }
         } catch (error) {
             console.error(error);
         }
@@ -131,13 +162,22 @@ export default function Admin() {
                     <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
                         Admin Dashboard
                     </h1>
-                    <button
-                        onClick={() => openModal()}
-                        className="btn-primary flex items-center gap-2"
-                    >
-                        <PlusIcon className="w-5 h-5" />
-                        Add New
-                    </button>
+                    <div className="flex gap-4">
+                        <button
+                            onClick={handleLogout}
+                            className="px-4 py-2 text-sm font-semibold text-gray-600 hover:text-red-600 dark:text-gray-300 dark:hover:text-red-400 transition-colors flex items-center gap-2"
+                        >
+                            <ArrowRightStartOnRectangleIcon className="w-5 h-5" />
+                            Logout
+                        </button>
+                        <button
+                            onClick={() => openModal()}
+                            className="btn-primary flex items-center gap-2"
+                        >
+                            <PlusIcon className="w-5 h-5" />
+                            Add New
+                        </button>
+                    </div>
                 </div>
 
                 {/* Tabs */}

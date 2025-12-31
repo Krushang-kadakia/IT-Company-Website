@@ -1,6 +1,7 @@
 const sequelize = require('../config/database');
 const Service = require('../models/Service');
 const Product = require('../models/Product');
+const User = require('../models/User');
 
 const servicesData = [
     {
@@ -126,6 +127,12 @@ const seedDatabase = async () => {
 
         await Product.bulkCreate(productsData);
         console.log('Products seeded.');
+
+        await User.create({
+            username: 'admin',
+            password: 'password123'
+        });
+        console.log('Admin user seeded (admin/password123).');
 
         process.exit(0);
     } catch (error) {

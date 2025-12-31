@@ -6,6 +6,7 @@ import Products from "../pages/Products";
 import About from "../pages/About";
 import Contact from "../pages/Contact";
 import NotFound from "../pages/NotFound";
+import Login from "../pages/Login";
 import Admin from "../pages/Admin";
 
 export default function AppRoutes() {
@@ -14,7 +15,7 @@ export default function AppRoutes() {
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
-        {["/", "/services", "/products", "/about", "/contact", "/admin"].map((path) => (
+        {["/", "/services", "/products", "/about", "/contact", "/admin", "/login"].map((path) => (
           <Route
             key={path}
             path={path}
@@ -32,6 +33,7 @@ export default function AppRoutes() {
                   "/about": <About />,
                   "/contact": <Contact />,
                   "/admin": <Admin />,
+                  "/login": <Login />,
                 }[path]}
               </motion.div>
             }

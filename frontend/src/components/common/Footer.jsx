@@ -104,10 +104,9 @@ export default function Footer() {
           <p className="text-gray-500 dark:text-gray-500">
             &copy; {currentYear} TechNova Inc. All rights reserved.
           </p>
-          <div className="flex space-x-6 text-gray-500 dark:text-gray-500">
-            <a href="#" className="hover:text-brand-primary transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-brand-primary transition-colors">Terms of Service</a>
-          </div>
+          <a href="#" className="hover:text-brand-primary transition-colors">Privacy Policy</a>
+          <a href="#" className="hover:text-brand-primary transition-colors">Terms of Service</a>
+          <Link to="/login" className="hover:text-brand-primary transition-colors">Admin Login</Link>
         </div>
       </div>
     </footer>
