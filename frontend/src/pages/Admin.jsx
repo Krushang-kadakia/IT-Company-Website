@@ -1,39 +1,13 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import * as HeroIcons from "@heroicons/react/24/outline";
 import {
     TrashIcon,
     PencilSquareIcon,
     PlusIcon,
     XMarkIcon,
-    ArrowRightStartOnRectangleIcon,
-    CodeBracketIcon,
-    DevicePhoneMobileIcon,
-    CpuChipIcon,
-    CloudIcon,
-    PaintBrushIcon,
-    BuildingOffice2Icon,
-    CommandLineIcon,
-    GlobeAltIcon,
-    ServerIcon,
-    ShieldCheckIcon,
-    UserGroupIcon,
-    ChartBarIcon
+    ArrowRightStartOnRectangleIcon
 } from "@heroicons/react/24/outline";
-
-const ICON_MAP = {
-    CodeBracketIcon,
-    DevicePhoneMobileIcon,
-    CpuChipIcon,
-    CloudIcon,
-    PaintBrushIcon,
-    BuildingOffice2Icon,
-    CommandLineIcon,
-    GlobeAltIcon,
-    ServerIcon,
-    ShieldCheckIcon,
-    UserGroupIcon,
-    ChartBarIcon
-};
 
 export default function Admin() {
     const navigate = useNavigate();
@@ -362,24 +336,40 @@ export default function Admin() {
 
                                         <div>
                                             <label className="block text-sm font-medium mb-2">Select Icon</label>
-                                            <div className="grid grid-cols-6 gap-2 bg-gray-50 dark:bg-gray-700/50 p-3 rounded-lg border border-gray-200 dark:border-gray-600">
-                                                {Object.keys(ICON_MAP).map((iconName) => {
-                                                    const Icon = ICON_MAP[iconName];
-                                                    return (
-                                                        <button
-                                                            key={iconName}
-                                                            type="button"
-                                                            onClick={() => setFormData(prev => ({ ...prev, icon: iconName }))}
-                                                            className={`p-2 rounded-lg flex items-center justify-center transition-all ${formData.icon === iconName
-                                                                ? 'bg-brand-primary text-white shadow-md'
-                                                                : 'bg-white dark:bg-gray-700 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-600'
-                                                                }`}
-                                                            title={iconName}
-                                                        >
-                                                            <Icon className="w-6 h-6" />
-                                                        </button>
-                                                    );
-                                                })}
+                                            <input
+                                                placeholder="Search icons (e.g. cloud, user, code)..."
+                                                className="w-full p-2 mb-2 text-sm rounded-lg border dark:bg-gray-700 dark:border-gray-600"
+                                                onChange={(e) => {
+                                                    // Simple client-side search
+                                                    const term = e.target.value.toLowerCase();
+                                                    // This will be handled in the render
+                                                    setFormData(prev => ({ ...prev, searchTerm: term }));
+                                                }}
+                                            />
+                                            <div className="grid grid-cols-6 gap-2 bg-gray-50 dark:bg-gray-700/50 p-3 rounded-lg border border-gray-200 dark:border-gray-600 max-h-48 overflow-y-auto">
+                                                {Object.keys(HeroIcons)
+                                                    .filter(key => key.endsWith('Icon')) // Only actual icons
+                                                    .filter(iconName => {
+                                                        if (!formData.searchTerm) return true;
+                                                        return iconName.toLowerCase().includes(formData.searchTerm);
+                                                    })
+                                                    .map((iconName) => {
+                                                        const Icon = HeroIcons[iconName];
+                                                        return (
+                                                            <button
+                                                                key={iconName}
+                                                                type="button"
+                                                                onClick={() => setFormData(prev => ({ ...prev, icon: iconName }))}
+                                                                className={`p-2 rounded-lg flex items-center justify-center transition-all ${formData.icon === iconName
+                                                                    ? 'bg-brand-primary text-white shadow-md'
+                                                                    : 'bg-white dark:bg-gray-700 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-600'
+                                                                    }`}
+                                                                title={iconName}
+                                                            >
+                                                                <Icon className="w-6 h-6" />
+                                                            </button>
+                                                        );
+                                                    })}
                                             </div>
                                             {formData.icon && (
                                                 <p className="text-xs text-gray-500 mt-1">Selected: {formData.icon}</p>

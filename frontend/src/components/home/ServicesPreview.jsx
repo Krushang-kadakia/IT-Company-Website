@@ -1,21 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-  CodeBracketIcon,
-  DevicePhoneMobileIcon,
-  CpuChipIcon,
-  CloudIcon,
-  PaintBrushIcon,
-  BuildingOffice2Icon,
-} from "@heroicons/react/24/outline";
-
-const iconMap = {
-  CodeBracketIcon,
-  DevicePhoneMobileIcon,
-  CpuChipIcon,
-  CloudIcon,
-  PaintBrushIcon,
-  BuildingOffice2Icon,
-};
+import * as HeroIcons from "@heroicons/react/24/outline";
 
 export default function ServicesPreview() {
   const [services, setServices] = useState([]);
@@ -41,15 +25,18 @@ export default function ServicesPreview() {
         </div>
 
         <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service) => (
-            <ServiceCard
-              key={service.id}
-              image={service.image}
-              icon={iconMap[service.icon]}
-              title={service.title}
-              description={service.description}
-            />
-          ))}
+          {services.map((service) => {
+            const IconComponent = HeroIcons[service.icon] || HeroIcons.QuestionMarkCircleIcon;
+            return (
+              <ServiceCard
+                key={service.id}
+                image={service.image}
+                icon={IconComponent}
+                title={service.title}
+                description={service.description}
+              />
+            );
+          })}
         </div>
 
       </div>

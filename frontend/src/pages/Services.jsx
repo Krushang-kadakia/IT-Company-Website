@@ -1,27 +1,11 @@
 import { useState, useEffect } from "react";
-import {
-  CodeBracketIcon,
-  DevicePhoneMobileIcon,
-  CpuChipIcon,
-  CloudIcon,
-  PaintBrushIcon,
-  BuildingOffice2Icon,
-} from "@heroicons/react/24/outline";
+import * as HeroIcons from "@heroicons/react/24/outline";
 
 import ServiceCard from "../components/services/ServiceCard";
 import Process from "../components/services/Process";
 import TechStack from "../components/services/TechStack";
 import Audience from "../components/services/Audience";
 import AnimatedSection from "../components/common/AnimatedSection";
-
-const iconMap = {
-  CodeBracketIcon,
-  DevicePhoneMobileIcon,
-  CpuChipIcon,
-  CloudIcon,
-  PaintBrushIcon,
-  BuildingOffice2Icon,
-};
 
 export default function Services() {
   const [services, setServices] = useState([]);
@@ -56,15 +40,18 @@ export default function Services() {
             </p>
 
             <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {services.map((service) => (
-                <ServiceCard
-                  key={service.id}
-                  title={service.title}
-                  description={service.description}
-                  icon={iconMap[service.icon]}
-                  image={service.image}
-                />
-              ))}
+              {services.map((service) => {
+                const IconComponent = HeroIcons[service.icon] || HeroIcons.QuestionMarkCircleIcon;
+                return (
+                  <ServiceCard
+                    key={service.id}
+                    title={service.title}
+                    description={service.description}
+                    icon={IconComponent}
+                    image={service.image}
+                  />
+                );
+              })}
             </div>
 
           </div>
