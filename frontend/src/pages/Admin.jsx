@@ -5,14 +5,42 @@ import {
     PencilSquareIcon,
     PlusIcon,
     XMarkIcon,
-    ArrowRightStartOnRectangleIcon
+    ArrowRightStartOnRectangleIcon,
+    CodeBracketIcon,
+    DevicePhoneMobileIcon,
+    CpuChipIcon,
+    CloudIcon,
+    PaintBrushIcon,
+    BuildingOffice2Icon,
+    CommandLineIcon,
+    GlobeAltIcon,
+    ServerIcon,
+    ShieldCheckIcon,
+    UserGroupIcon,
+    ChartBarIcon
 } from "@heroicons/react/24/outline";
+
+const ICON_MAP = {
+    CodeBracketIcon,
+    DevicePhoneMobileIcon,
+    CpuChipIcon,
+    CloudIcon,
+    PaintBrushIcon,
+    BuildingOffice2Icon,
+    CommandLineIcon,
+    GlobeAltIcon,
+    ServerIcon,
+    ShieldCheckIcon,
+    UserGroupIcon,
+    ChartBarIcon
+};
 
 export default function Admin() {
     const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState("services");
     const [services, setServices] = useState([]);
     const [products, setProducts] = useState([]);
+    const [contacts, setContacts] = useState([]);
 
     // UI State
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -28,6 +56,7 @@ export default function Admin() {
         }
         fetchServices();
         fetchProducts();
+        fetchContacts();
     }, [navigate]);
 
     const getAuthHeaders = () => {
@@ -47,6 +76,13 @@ export default function Admin() {
             .then(res => res.json())
             .then(data => setProducts(data))
             .catch(() => alert('Failed to fetch products'));
+    };
+
+    const fetchContacts = () => {
+        fetch('/api/contact', { headers: getAuthHeaders() })
+            .then(res => res.json())
+            .then(data => setContacts(data))
+            .catch(() => console.error('Failed to fetch messages'));
     };
 
     const handleLogout = () => {
@@ -137,7 +173,10 @@ export default function Admin() {
     const handleDelete = async (id) => {
         if (!confirm('Are you sure you want to delete this item?')) return;
 
-        const endpoint = activeTab === 'services' ? `/api/services/${id}` : `/api/products/${id}`;
+        let endpoint;
+        if (activeTab === 'services') endpoint = `/api/services/${id}`;
+        else if (activeTab === 'products') endpoint = `/api/products/${id}`;
+        else endpoint = `/api/contact/${id}`;
 
         try {
             const res = await fetch(endpoint, {
@@ -146,7 +185,8 @@ export default function Admin() {
             });
             if (res.ok) {
                 if (activeTab === 'services') fetchServices();
-                else fetchProducts();
+                else if (activeTab === 'products') fetchProducts();
+                else fetchContacts();
             } else if (res.status === 401) {
                 handleLogout();
             }
@@ -170,13 +210,15 @@ export default function Admin() {
                             <ArrowRightStartOnRectangleIcon className="w-5 h-5" />
                             Logout
                         </button>
-                        <button
-                            onClick={() => openModal()}
-                            className="btn-primary flex items-center gap-2"
-                        >
-                            <PlusIcon className="w-5 h-5" />
-                            Add New
-                        </button>
+                        {activeTab !== 'messages' && (
+                            <button
+                                onClick={() => openModal()}
+                                className="btn-primary flex items-center gap-2"
+                            >
+                                <PlusIcon className="w-5 h-5" />
+                                Add New
+                            </button>
+                        )}
                     </div>
                 </div>
 
@@ -194,46 +236,77 @@ export default function Admin() {
                     >
                         Products
                     </button>
+                    <button
+                        className={`pb-4 px-2 font-semibold ${activeTab === 'messages' ? 'text-brand-primary border-b-2 border-brand-primary' : 'text-gray-500'}`}
+                        onClick={() => setActiveTab('messages')}
+                    >
+                        Messages
+                    </button>
                 </div>
 
                 {/* Content List */}
                 <div className="grid gap-4">
-                    {(activeTab === 'services' ? services : products).map(item => (
-                        <div
-                            key={item.id}
-                            className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm flex items-center justify-between"
-                        >
-                            <div className="flex items-center gap-4">
-                                <img
-                                    src={item.image}
-                                    alt={item.title || item.name}
-                                    className="w-16 h-16 object-contain bg-gray-50 rounded-lg p-2"
-                                />
-                                <div>
-                                    <h3 className="font-bold text-gray-900 dark:text-gray-100">
-                                        {item.title || item.name}
-                                    </h3>
-                                    <p className="text-sm text-gray-500 line-clamp-1">
-                                        {item.description}
-                                    </p>
+                    {activeTab === 'messages' ? (
+                        contacts.length === 0 ? (
+                            <p className="text-gray-500 text-center py-8">No messages yet.</p>
+                        ) : (
+                            contacts.map(msg => (
+                                <div key={msg.id} className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+                                    <div className="flex justify-between items-start mb-4">
+                                        <div>
+                                            <h3 className="font-bold text-gray-900 dark:text-gray-100">{msg.name}</h3>
+                                            <p className="text-sm text-brand-primary">{msg.email}</p>
+                                            <p className="text-xs text-gray-400 mt-1">{new Date(msg.createdAt).toLocaleString()}</p>
+                                        </div>
+                                        <button
+                                            onClick={() => handleDelete(msg.id)}
+                                            className="p-2 text-red-600 hover:bg-red-50 rounded-lg"
+                                        >
+                                            <TrashIcon className="w-5 h-5" />
+                                        </button>
+                                    </div>
+                                    <p className="text-gray-600 dark:text-gray-300 whitespace-pre-wrap">{msg.message}</p>
+                                </div>
+                            ))
+                        )
+                    ) : (
+                        (activeTab === 'services' ? services : products).map(item => (
+                            <div
+                                key={item.id}
+                                className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm flex items-center justify-between"
+                            >
+                                <div className="flex items-center gap-4">
+                                    <img
+                                        src={item.image}
+                                        alt={item.title || item.name}
+                                        className="w-16 h-16 object-contain bg-gray-50 rounded-lg p-2"
+                                    />
+                                    <div>
+                                        <h3 className="font-bold text-gray-900 dark:text-gray-100">
+                                            {item.title || item.name}
+                                        </h3>
+                                        <p className="text-sm text-gray-500 line-clamp-1">
+                                            {item.description}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className="flex gap-2">
+                                    <button
+                                        onClick={() => openModal(item)}
+                                        className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg"
+                                    >
+                                        <PencilSquareIcon className="w-5 h-5" />
+                                    </button>
+                                    <button
+                                        onClick={() => handleDelete(item.id)}
+                                        className="p-2 text-red-600 hover:bg-red-50 rounded-lg"
+                                    >
+                                        <TrashIcon className="w-5 h-5" />
+                                    </button>
                                 </div>
                             </div>
-                            <div className="flex gap-2">
-                                <button
-                                    onClick={() => openModal(item)}
-                                    className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg"
-                                >
-                                    <PencilSquareIcon className="w-5 h-5" />
-                                </button>
-                                <button
-                                    onClick={() => handleDelete(item.id)}
-                                    className="p-2 text-red-600 hover:bg-red-50 rounded-lg"
-                                >
-                                    <TrashIcon className="w-5 h-5" />
-                                </button>
-                            </div>
-                        </div>
-                    ))}
+                        ))
+                    )}
                 </div>
 
                 {/* Modal */}
@@ -259,8 +332,11 @@ export default function Admin() {
                                         onChange={handleFileChange}
                                         className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-brand-primary/10 file:text-brand-primary hover:file:bg-brand-primary/20"
                                     />
+                                    <p className="text-xs text-gray-400 mt-1">
+                                        The image should have a transparent background for integration with light and dark mode.
+                                    </p>
                                     {editingItem && !formData.image && (
-                                        <p className="text-xs text-gray-400 mt-1">Current: {editingItem.image}</p>
+                                        <p className="text-xs text-brand-primary mt-1">Current: {editingItem.image}</p>
                                     )}
                                 </div>
 
@@ -283,13 +359,32 @@ export default function Admin() {
                                             rows="3"
                                             required
                                         />
-                                        <input
-                                            name="icon"
-                                            placeholder="Icon Name (e.g. CodeBracketIcon)"
-                                            value={formData.icon || ''}
-                                            onChange={handleInputChange}
-                                            className="w-full p-2 rounded-lg border dark:bg-gray-700 dark:border-gray-600"
-                                        />
+
+                                        <div>
+                                            <label className="block text-sm font-medium mb-2">Select Icon</label>
+                                            <div className="grid grid-cols-6 gap-2 bg-gray-50 dark:bg-gray-700/50 p-3 rounded-lg border border-gray-200 dark:border-gray-600">
+                                                {Object.keys(ICON_MAP).map((iconName) => {
+                                                    const Icon = ICON_MAP[iconName];
+                                                    return (
+                                                        <button
+                                                            key={iconName}
+                                                            type="button"
+                                                            onClick={() => setFormData(prev => ({ ...prev, icon: iconName }))}
+                                                            className={`p-2 rounded-lg flex items-center justify-center transition-all ${formData.icon === iconName
+                                                                ? 'bg-brand-primary text-white shadow-md'
+                                                                : 'bg-white dark:bg-gray-700 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-600'
+                                                                }`}
+                                                            title={iconName}
+                                                        >
+                                                            <Icon className="w-6 h-6" />
+                                                        </button>
+                                                    );
+                                                })}
+                                            </div>
+                                            {formData.icon && (
+                                                <p className="text-xs text-gray-500 mt-1">Selected: {formData.icon}</p>
+                                            )}
+                                        </div>
                                     </>
                                 ) : (
                                     <>

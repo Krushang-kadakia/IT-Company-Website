@@ -83,17 +83,17 @@ export default function Footer() {
             <ul className="space-y-3">
               <li className="flex items-center text-sm text-gray-600 dark:text-gray-400">
                 <span className="mr-2">📧</span>
-                <a href="mailto:hello@technova.com" className="hover:text-brand-primary transition-colors">
-                  hello@technova.com
+                <a href="mailto:contact@technova.com" className="hover:text-brand-primary transition-colors">
+                  contact@technova.com
                 </a>
               </li>
               <li className="flex items-center text-sm text-gray-600 dark:text-gray-400">
                 <span className="mr-2">📍</span>
-                <span>San Francisco, CA</span>
+                <span>Mumbai, Maharashtra</span>
               </li>
               <li className="flex items-center text-sm text-gray-600 dark:text-gray-400">
                 <span className="mr-2">📞</span>
-                <span>+1 (555) 123-4567</span>
+                <span>+(91) 9876543210</span>
               </li>
             </ul>
           </div>

@@ -21,4 +21,10 @@ router.post('/products', authMiddleware, upload.single('image'), apiController.c
 router.put('/products/:id', authMiddleware, upload.single('image'), apiController.updateProduct);
 router.delete('/products/:id', authMiddleware, apiController.deleteProduct);
 
+// Contact
+const contactController = require('../controllers/contactController');
+router.post('/contact', contactController.submitContact);
+router.get('/contact', authMiddleware, contactController.getContacts);
+router.delete('/contact/:id', authMiddleware, contactController.deleteContact);
+
 module.exports = router;

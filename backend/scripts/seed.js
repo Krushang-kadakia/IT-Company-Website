@@ -2,6 +2,7 @@ const sequelize = require('../config/database');
 const Service = require('../models/Service');
 const Product = require('../models/Product');
 const User = require('../models/User');
+const Contact = require('../models/Contact');
 
 const servicesData = [
     {
