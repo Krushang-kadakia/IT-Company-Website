@@ -72,7 +72,15 @@ export default function Admin() {
     };
 
     const handleFileChange = (e) => {
-        setFormData(prev => ({ ...prev, image: e.target.files[0] }));
+        const file = e.target.files[0];
+        if (file) {
+            if (file.type !== 'image/png') {
+                alert('Only PNG files are allowed');
+                e.target.value = ''; // Reset input
+                return;
+            }
+            setFormData(prev => ({ ...prev, image: file }));
+        }
     };
 
     const openModal = (item = null) => {
@@ -299,15 +307,15 @@ export default function Admin() {
                             <form onSubmit={handleSubmit} className="space-y-4">
                                 {/* Common Fields */}
                                 <div>
-                                    <label className="block text-sm font-medium mb-1">Image</label>
+                                    <label className="block text-sm font-medium mb-1">Image (PNG Only)</label>
                                     <input
                                         type="file"
-                                        accept="image/*"
+                                        accept="image/png"
                                         onChange={handleFileChange}
                                         className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-brand-primary/10 file:text-brand-primary hover:file:bg-brand-primary/20"
                                     />
                                     <p className="text-xs text-gray-400 mt-1">
-                                        The image should have a transparent background for integration with light and dark mode.
+                                        The image must be in PNG format with a transparent background.
                                     </p>
                                     {editingItem && !formData.image && (
                                         <p className="text-xs text-brand-primary mt-1">Current: {editingItem.image}</p>

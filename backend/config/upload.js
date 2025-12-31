@@ -26,11 +26,12 @@ const storage = multer.diskStorage({
 });
 
 // File filter (optional, to ensure only images are uploaded)
+// File filter (restrict to PNG only)
 const fileFilter = (req, file, cb) => {
-    if (file.mimetype.startsWith('image/')) {
+    if (file.mimetype === 'image/png') {
         cb(null, true);
     } else {
-        cb(new Error('Not an image! Please upload an image.'), false);
+        cb(new Error('Only .png files are allowed!'), false);
     }
 };
 
