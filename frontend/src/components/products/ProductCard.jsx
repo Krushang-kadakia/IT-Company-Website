@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export default function ProductCard({
   image,
@@ -116,7 +117,8 @@ export default function ProductCard({
 
           {/* CTA */}
           <div className="mt-10">
-            <button
+            <Link
+              to="/contact"
               className="
                 text-sm font-semibold text-brand-primary
                 inline-flex items-center gap-1
@@ -124,8 +126,8 @@ export default function ProductCard({
                 hover:gap-2 hover:underline
               "
             >
-              Learn more →
-            </button>
+              Interested in this product?
+            </Link>
           </div>
 
         </div>
