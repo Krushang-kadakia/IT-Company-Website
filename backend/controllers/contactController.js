@@ -3,13 +3,21 @@ const Contact = require('../models/Contact');
 // Public: Submit a message
 exports.submitContact = async (req, res) => {
     try {
-        const { name, email, message } = req.body;
+        const { name, email, message, product, services } = req.body;
 
-        if (!name || !email || !message) {
-            return res.status(400).json({ message: 'All fields are required' });
+        // Check if product exists and has at least one item (if array) or truthy (if string)
+        const hasProduct = Array.isArray(product) ? product.length > 0 : !!product;
+
+        if (!name || !email || !message || !hasProduct) {
+            return res.status(400).json({ message: 'All fields (including at least one product) are required' });
         }
 
-        const newContact = await Contact.create({ name, email, message });
+        // Ensure services is a string if it comes as an array
+        const servicesData = Array.isArray(services) ? JSON.stringify(services) : services;
+        // Ensure product is a string if it comes as an array
+        const productData = Array.isArray(product) ? JSON.stringify(product) : product;
+
+        const newContact = await Contact.create({ name, email, message, product: productData, services: servicesData });
         res.status(201).json({ message: 'Message sent successfully', contact: newContact });
     } catch (error) {
         console.error('Contact error:', error);

@@ -234,24 +234,48 @@ export default function Admin() {
                         contacts.length === 0 ? (
                             <p className="text-gray-500 text-center py-8">No messages yet.</p>
                         ) : (
-                            contacts.map(msg => (
-                                <div key={msg.id} className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
-                                    <div className="flex justify-between items-start mb-4">
-                                        <div>
-                                            <h3 className="font-bold text-gray-900 dark:text-gray-100">{msg.name}</h3>
-                                            <p className="text-sm text-brand-primary">{msg.email}</p>
-                                            <p className="text-xs text-gray-400 mt-1">{new Date(msg.createdAt).toLocaleString()}</p>
+                            contacts.map(msg => {
+                                const products = (() => {
+                                    try {
+                                        return Array.isArray(msg.product) ? msg.product : JSON.parse(msg.product || '[]');
+                                    } catch {
+                                        return [msg.product].filter(Boolean);
+                                    }
+                                })();
+                                const services = (() => {
+                                    try {
+                                        return Array.isArray(msg.services) ? msg.services : JSON.parse(msg.services || '[]');
+                                    } catch {
+                                        return msg.services ? [msg.services] : [];
+                                    }
+                                })();
+
+                                return (
+                                    <div key={msg.id} className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+                                        <div className="flex justify-between items-start mb-4">
+                                            <div>
+                                                <h3 className="font-bold text-gray-900 dark:text-gray-100">{msg.name}</h3>
+                                                <p className="text-sm text-brand-primary">{msg.email}</p>
+                                                <p className="text-xs text-gray-400 mt-1">{new Date(msg.createdAt).toLocaleString()}</p>
+
+                                                <div className="mt-2 text-sm">
+                                                    <p><span className="font-semibold text-gray-700 dark:text-gray-300">Product:</span> {products.join(', ')}</p>
+                                                    {services.length > 0 && (
+                                                        <p><span className="font-semibold text-gray-700 dark:text-gray-300">Services:</span> {services.join(', ')}</p>
+                                                    )}
+                                                </div>
+                                            </div>
+                                            <button
+                                                onClick={() => handleDelete(msg.id)}
+                                                className="p-2 text-red-600 hover:bg-red-50 rounded-lg"
+                                            >
+                                                <TrashIcon className="w-5 h-5" />
+                                            </button>
                                         </div>
-                                        <button
-                                            onClick={() => handleDelete(msg.id)}
-                                            className="p-2 text-red-600 hover:bg-red-50 rounded-lg"
-                                        >
-                                            <TrashIcon className="w-5 h-5" />
-                                        </button>
+                                        <p className="text-gray-600 dark:text-gray-300 whitespace-pre-wrap">{msg.message}</p>
                                     </div>
-                                    <p className="text-gray-600 dark:text-gray-300 whitespace-pre-wrap">{msg.message}</p>
-                                </div>
-                            ))
+                                );
+                            })
                         )
                     ) : (
                         (activeTab === 'services' ? services : products).map(item => (

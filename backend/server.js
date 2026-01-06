@@ -40,11 +40,12 @@ const startServer = async () => {
         await sequelize.authenticate();
         console.log('Database connected successfully.');
 
-        // Sync models (force: false to avoid dropping tables)
-        await sequelize.sync({ force: false });
+        // Sync models (alter: true to update schema without dropping tables)
+        await sequelize.sync({ alter: true });
 
         app.listen(PORT, () => {
             console.log(`Server is running on port ${PORT}`);
+            console.log('Server initialized.');
         });
     } catch (error) {
         console.error('Unable to connect to the database:', error);
