@@ -1,10 +1,12 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
-export default function Button({ children, variant = "primary" }) {
+export default function Button({ children, variant = "primary", to, ...props }) {
   const base =
     `
     relative inline-flex items-center justify-center
     px-6 py-3 rounded-lg font-semibold
+    cursor-pointer
     focus:outline-none focus-visible:ring-2
     focus-visible:ring-brand-primary focus-visible:ring-offset-2
     `;
@@ -22,14 +24,16 @@ export default function Button({ children, variant = "primary" }) {
       `,
   };
 
+  const Component = to ? Link : motion.button;
+  const extraProps = to ? { to } : { whileHover: { scale: 1.05 }, whileTap: { scale: 0.95 } };
+
   return (
-    <motion.button
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+    <Component
       className={`${base} ${variants[variant]}`}
+      {...extraProps}
+      {...props}
     >
       {children}
-    </motion.button>
+    </Component>
   );
 }

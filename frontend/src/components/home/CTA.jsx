@@ -1,5 +1,6 @@
 import Button from "../common/Button";
 
+
 export default function CTA() {
   return (
     <section
@@ -22,7 +23,7 @@ export default function CTA() {
         </p>
 
         <div className="mt-10">
-          <Button>Contact Us</Button>
+          <Button to="/contact">Contact Us</Button>
         </div>
       </div>
     </section>

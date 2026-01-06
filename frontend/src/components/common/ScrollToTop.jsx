@@ -1,53 +1,13 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUp } from "lucide-react";
+import { useLayoutEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 export default function ScrollToTop() {
-    const [isVisible, setIsVisible] = useState(false);
+    const { pathname } = useLocation();
 
-    useEffect(() => {
-        const toggleVisibility = () => {
-            if (window.scrollY > 300) {
-                setIsVisible(true);
-            } else {
-                setIsVisible(false);
-            }
-        };
+    useLayoutEffect(() => {
+        // Force scroll to top immediately
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    }, [pathname]);
 
-        window.addEventListener("scroll", toggleVisibility);
-        return () => window.removeEventListener("scroll", toggleVisibility);
-    }, []);
-
-    const scrollToTop = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-        });
-    };
-
-    return (
-        <AnimatePresence>
-            {isVisible && (
-                <motion.button
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.5 }}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={scrollToTop}
-                    className="
-            fixed bottom-8 right-8 z-50
-            p-3 rounded-full
-            bg-brand-primary text-white
-            shadow-lg shadow-brand-primary/30
-            hover:bg-brand-secondary
-            transition-colors
-          "
-                    aria-label="Scroll to top"
-                >
-                    <ArrowUp size={24} />
-                </motion.button>
-            )}
-        </AnimatePresence>
-    );
+    return null;
 }
